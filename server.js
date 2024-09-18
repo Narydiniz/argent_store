@@ -15,11 +15,11 @@ app.use(cors()); // Habilita o CORS para todas as rotas
 app.use(bodyParser.json()); // Configura o body-parser para analisar requisições JSON
 
 // Importar as rotas de transações e autenticação 
-//const productsRouters = require('./routes/products'); // Importa as rotas de produtos
+const estoqueRouters = require('./routes/estoque'); // Importa as rotas de produtos
 //const authRoutes = require('./routes/auth'); // Importa as rotas de autenticação 
 
 // Usar as rotas de transações e autenticação para as requisições 
-//app.use('/api/products',productsRouters); // Usar as rotas de transações para todas as requisições que começam com /api/transactions
+app.use('/api/estoque',estoqueRouters); // Usar as rotas de transações para todas as requisições que começam com /api/transactions
 //app.use('/api/auth', authRoutes); // Configura o servidor para usar as rotas de autenticação
 
 //Rota inicial para testar o servidor 
@@ -28,7 +28,7 @@ app.get('/', (req,res) => {
     res.send('Servidor está funcionando corretamente');
 });
 
-// Define a porta a par r da variável de ambiente ou usa a porta 3000 como padrão
+// Define a porta a par r da variável de ambiente ou usa a porta 5000 como padrão
 
 const PORT = process.env.Port || 5000;
 
