@@ -19,7 +19,7 @@ const estoqueRouters = require('./routes/estoque'); // Importa as rotas de produ
 //const authRoutes = require('./routes/auth'); // Importa as rotas de autenticação 
 
 // Usar as rotas de transações e autenticação para as requisições 
-app.use('/api/estoque',estoqueRouters); // Usar as rotas de transações para todas as requisições que começam com /api/transactions
+app.use('/api/estoque', estoqueRouters); // Usar as rotas de transações para todas as requisições que começam com /api/transactions
 //app.use('/api/auth', authRoutes); // Configura o servidor para usar as rotas de autenticação
 
 //Rota inicial para testar o servidor 

@@ -13,10 +13,10 @@ const getAllProducts = (require, res) => {
 };
 // Função para adicionar uma nova transação 
 const addProducts = (req, res) => { 
-    const {quant_estoque, descricao,categoria, preco, cadastro_id } = req.body; 
+    const {quant_estoque, descricao,categoria, preco_compra, cadastro_id } = req.body; 
     db.query( 
-      'INSERT INTO estoque (quant_estoque, descricao, categoria, preco, cadastro_id) VALUES  (?, ?, ?, ?, ?)', 
-      [quant_estoque, descricao,categoria, preco, cadastro_id], 
+      'INSERT INTO estoque (quant_estoque, descricao, categoria, preco_compra, cadastro_id) VALUES  (?, ?, ?, ?, ?)', 
+      [quant_estoque, descricao,categoria, preco_compra, cadastro_id], 
       (err, results) => { 
         if (err) { 
           console.error('Erro ao adicionar novo produto no estoque:', err); 
@@ -32,14 +32,14 @@ const addProducts = (req, res) => {
 // Função para atualizar uma transação existente (substituição completa) 
 const updateProductsPut = (req, res) => {
     const { id } = req.params;
-    const { quant_estoque, descricao,categoria, preco, cadastro_id } = req.body;
+    const { quant_estoque, descricao, categoria, preco_compra, cadastro_id} = req.body;
     db.query(
-      'UPDATE estoque SET quant_estoque = ?,  descricao = ?, categoria = ?, preco = ?, cadastro_id = ? WHERE id = ?',
-      [quant_estoque, descricao,categoria, preco, cadastro_id], 
+      'UPDATE estoque SET quant_estoque=?,  descricao=?, categoria=?, preco_compra=?, cadastro_id=? WHERE id=?',
+      [quant_estoque, descricao, categoria, preco_compra, cadastro_id, id], 
       (err, results) => {
         if (err) {
-          console.error('Erro ao atualizar o produto do estoque', err);
-          res.status(500).send('Erro ao atualizar o produto do estoque');
+          console.error('Erro ao subestituir o produto do estoque', err);
+          res.status(500).send('Erro ao substituir o produto do estoque');
           return;
         }
         res.send('Dados do produto atualizado com sucesso');
