@@ -1,7 +1,7 @@
 const db = require('../config/db'); // Importa a conexão com o banco de dados 
 
 // Função para obter todas as transações 
-const getAllProducts = (require, res) => {
+const getAllEstoque = (require, res) => {
     db.query('SELECT * FROM estoque', (err, results) => {
         if (err) {
             console.error('Erro ao obter todos os produtos do estoque:', err);
@@ -11,26 +11,50 @@ const getAllProducts = (require, res) => {
         res.json(results);
     });
 };
-// Função para adicionar uma nova transação 
-const addProducts = (req, res) => { 
-    const {quant_estoque, descricao,categoria, preco_compra, cadastro_id } = req.body; 
-    db.query( 
-      'INSERT INTO estoque (quant_estoque, descricao, categoria, preco_compra, cadastro_id) VALUES  (?, ?, ?, ?, ?)', 
-      [quant_estoque, descricao,categoria, preco_compra, cadastro_id], 
-      (err, results) => { 
-        if (err) { 
-          console.error('Erro ao adicionar novo produto no estoque:', err); 
-          res.status(500).send('Erro ao adicionar  novo produto no estoque'); 
-          return; 
-        } 
-        res.status(201).send('Novo produto adicionado ao estoque'); 
-      } 
-      
-    ); 
-  };
+
+//Função para adicionar uma nova transação (Com verificação de Duplicidade)
+const addEstoque = (req, res) => {
+    const { quant_estoque, descricao,categoria, preco_compra, cadastro_id } = req.body;
+
+    //Verificar se a transação já existe
+
+    db.query(
+        'SELECT * FROM estoque WHERE quant_estoque=?, AND descricao=? AND categoria=? AND preco_compra=? AND acadastro_id=?',
+        [quant_estoque, descricao,categoria, preco_compra, cadastro_id],
+        (err, results) => {
+            if (err) {
+                console.error('Erro ao adicionar transação', err);
+                res.status(500).send('Erro ao adicionar transação');
+                return;
+            }
+
+            if (results.length > 0) {
+                //se a transação já existe
+                res.status(400).send('Transação duplicada')
+            }
+
+
+            // Se a transação não existe, insira-a no banco de dados 
+            db.query(
+                'INSERT INTO estoque (quant_estoque, descricao, categoria, preco_compra, cadastro_id) VALUES  (?, ?, ?, ?, ?)',
+                [quant_estoque, descricao,categoria, preco_compra, cadastro_id],
+                (err, results) => {
+                    if (err) {
+                        console.error('Erro ao adicionar novo produto no estoque', err);
+                        res.status(500).send('Erro ao adicionar  novo produto no estoque');
+                        return;
+                    }
+                    res.status(201).send('Novo produto adicionado ao estoque');
+                }
+
+            );
+        }
+    );
+};
+
 
 // Função para atualizar uma transação existente (substituição completa) 
-const updateProductsPut = (req, res) => {
+const putEstoque = (req, res) => {
     const { id } = req.params;
     const { quant_estoque, descricao, categoria, preco_compra, cadastro_id} = req.body;
     db.query(
@@ -49,7 +73,7 @@ const updateProductsPut = (req, res) => {
    
    
   // Função para atualizar uma transação existente (atualização parcial) 
-  const ProductsPatch = (req, res) => { 
+  const updateEstoque = (req, res) => { 
     const { id } = req.params; 
     const fields = req.body; 
     const query = []; 
@@ -76,7 +100,7 @@ const updateProductsPut = (req, res) => {
   };
 
 // Função para deletar uma transação existente 
-const deleteProducts = (req, res) => { 
+const deleteEstoque= (req, res) => { 
     const { id } = req.params; 
     db.query('DELETE FROM estoque WHERE id = ?', [id], (err, results) => { 
       if (err) { 
@@ -84,15 +108,15 @@ const deleteProducts = (req, res) => {
         res.status(500).send('Erro ao deletar produto do estoque'); 
         return; 
       } 
-      res.send('Produto do estoque deletada com sucesso'); 
+      res.send('Produto do estoque deletado com sucesso'); 
     }); 
   }; 
    
  
 module.exports = {
-    getAllProducts,
-    addProducts,
-    updateProductsPut,
-    ProductsPatch,
-    deleteProducts
-};
+    getAllEstoque,
+    addEstoque,
+    putEstoque,
+    updateEstoque,
+    deleteEstoque
+  };

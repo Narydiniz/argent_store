@@ -25,14 +25,14 @@ DROP TABLE IF EXISTS `estoque`;
 CREATE TABLE `estoque` (
   `id` int NOT NULL AUTO_INCREMENT,
   `quant_estoque` int NOT NULL,
-  `descriçao` varchar(255) NOT NULL,
+  `descricao` varchar(255) NOT NULL,
   `categoria` varchar(255) NOT NULL,
-  `preço` decimal(10,2) NOT NULL,
+  `preco_compra` decimal(10,2) NOT NULL,
   `cadastro_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `cadastro_id` (`cadastro_id`),
   CONSTRAINT `estoque_ibfk_1` FOREIGN KEY (`cadastro_id`) REFERENCES `cadastro` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,6 +41,7 @@ CREATE TABLE `estoque` (
 
 LOCK TABLES `estoque` WRITE;
 /*!40000 ALTER TABLE `estoque` DISABLE KEYS */;
+INSERT INTO `estoque` VALUES (1,3,'Aliança Lisboa','Alianças',500.00,1),(2,10,'Pulseira de bolinha e coração vazado','Pulsseiras',620.00,1),(3,13,'Anel olho grego','Aneis',490.00,1),(4,10,'Gravatinha 2 pontos de luz','Colares',1250.00,1),(5,6,'Pulseira pandora fecho tradicional','Pulseira',1000.00,5);
 /*!40000 ALTER TABLE `estoque` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-09-18 10:33:22
+-- Dump completed on 2024-09-20 10:36:16

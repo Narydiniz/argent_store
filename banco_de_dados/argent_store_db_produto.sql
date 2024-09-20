@@ -16,36 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `cadastro`
+-- Table structure for table `produto`
 --
 
-DROP TABLE IF EXISTS `cadastro`;
+DROP TABLE IF EXISTS `produto`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `cadastro` (
+CREATE TABLE `produto` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `sobrenome` varchar(255) NOT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `telefone` char(25) NOT NULL,
-  `data_nascimento` date NOT NULL,
-  `senha` varchar(255) NOT NULL,
-  `estado` varchar(255) NOT NULL,
-  `reset_password_token` varchar(255) DEFAULT NULL,
-  `reset_password_expires` datetime DEFAULT NULL,
+  `nome` varchar(150) NOT NULL,
+  `descricao` varchar(150) DEFAULT NULL,
+  `preco_venda` decimal(10,2) DEFAULT NULL,
+  `categoria` varchar(50) DEFAULT NULL,
+  `estoque_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `estoque_id` (`estoque_id`),
+  CONSTRAINT `produto_ibfk_1` FOREIGN KEY (`estoque_id`) REFERENCES `estoque` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `cadastro`
+-- Dumping data for table `produto`
 --
 
-LOCK TABLES `cadastro` WRITE;
-/*!40000 ALTER TABLE `cadastro` DISABLE KEYS */;
-INSERT INTO `cadastro` VALUES (1,'Ana','Lima','analima@gmail.com','86995678903','1990-08-28','142536','PI',NULL,NULL),(2,'Naryara','Diniz','senainaryara@gmail.com','86994886931','1998-03-01','475869','PI',NULL,NULL),(3,'Conceção','Diniz','conceicaodiniz60@gmail.com','86994776123','1960-03-23','451263','PI',NULL,NULL),(4,'Conceição','ssousa','conceicaosoares60@gmail.com','86994776123','1980-03-23','$2b$10$l6LdnlwffKFm.OTceXr5UOW7SFuLpX5VmmAZzmFDlLH9j6Pvz9dy.','PI',NULL,NULL),(5,'Carlos','Silga','carlossilvaphb@gmail.com','86994916123','2000-03-23','$2b$10$NkNbVSW.39o0zW7HcCMYZe9HqDrU141v6mzaipONvuRV5HDbL7MhC','PI',NULL,NULL);
-/*!40000 ALTER TABLE `cadastro` ENABLE KEYS */;
+LOCK TABLES `produto` WRITE;
+/*!40000 ALTER TABLE `produto` DISABLE KEYS */;
+INSERT INTO `produto` VALUES (1,'Argola','Argola cravejada 3 fileiras',90.00,'Brincos',1),(2,'Pulseira','Pulseira de bolinha e coração vazado',105.00,'Pulsseiras',1),(3,'Anel','Anel olho grego',65.00,'Aneis',1),(4,'Choker','Choker laminada',115.00,'Colares',1);
+/*!40000 ALTER TABLE `produto` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
