@@ -39,13 +39,13 @@ const loginUser = async (req, res) => {
   try {
     const [user] = await db.promise().query("SELECT * FROM cadastro WHERE email = ?",[email]);
     if (user.length === 0) {
-      return res.status(400).send("email inválido");
+      return res.status(400).send("Credenciais inválidas (email inválido)");
     }
 
     // Comparar a senha fornecida com a senha criptografada no banco de dados
     const isMatch = await bcrypt.compare(senha, user[0].senha);
     if (!isMatch) {
-      return res.status(400).send("senha inválida");
+      return res.status(400).send(" Credenciais inválidas (senha inválida)");
     }
 
     // Gerar um token JWT
@@ -63,14 +63,14 @@ const loginUser = async (req, res) => {
 const requestPasswordReset = async (req, res) => {
   const { email } = req.body;
   try {
-    const [user] = await db.promise().query("SELECT * FROM register WHERE email = ?", [email]);
+    const [user] = await db.promise().query("SELECT * FROM cadastro WHERE email = ?", [email]);
     if (user.length === 0) {
       return res.status(404).send("Usuário não encontrado");
     }
     const token = crypto.randomBytes(20).toString("hex"); // Gera um token aleatório
     const expireDate = new Date(Date.now() + 3600000); // 1 hora para expiração
     await db
-      .promise().query( "UPDATE register SET reset_password_token = ?, reset_password_expires = ? WHERE email = ?",
+      .promise().query( "UPDATE cadastro SET reset_password_token = ?, reset_password_expires = ? WHERE email = ?",
       [token, expireDate, email]
       );
     const resetLink = `http://localhost:3000/reset-password/${token}`; // Link para redefinição de senha
@@ -98,7 +98,7 @@ const resetPassword = async (req, res) => {
     }
     const hashedPassword = await bcrypt.hash(newPassword, 10); // Criptografa a nova senha
     await db
-      .promise().query("UPDATE cadastro SET password = ?, reset_password_token = NULL, reset_password_expires = NULL WHERE id = ?",
+      .promise().query("UPDATE cadastro SET senha = ?, reset_password_token = NULL, reset_password_expires = NULL WHERE id = ?",
         [hashedPassword, user[0].id]
       );
     res.send("Senha redefinida com sucesso");
