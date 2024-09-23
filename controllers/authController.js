@@ -6,7 +6,7 @@ const sendEmail = require("../services/emailService").sendEmail;
 
 // Função para registrar um novo usuário
 const registerUser = async (req, res) => {
-  const { name,sobrenome,email,telefone,data_nascimento,senha,estado } = req.body; // Desestrutura os dados do corpo da requisição
+  const { name,sobrenome,email,telefone,data_nascimento,senha,CEP } = req.body; // Desestrutura os dados do corpo da requisição
 
   // Verificar se o usuário já existe no banco de dados
   try {
@@ -21,8 +21,8 @@ const registerUser = async (req, res) => {
 
     // Inserir o novo usuário no banco de dados
     await db.promise().query(
-        "INSERT INTO cadastro (name,sobrenome,email,telefone,data_nascimento,senha,estado) VALUES (?, ?, ?, ?,?,?,?)",
-        [name,sobrenome,email,telefone,data_nascimento,hashedPassword,estado ]
+        "INSERT INTO cadastro (name,sobrenome,email,telefone,data_nascimento,senha,CEP) VALUES (?, ?, ?, ?,?,?,?)",
+        [name,sobrenome,email,telefone,data_nascimento,hashedPassword,CEP ]
       );
     res.status(201).send("Usuário registrado com sucesso");
   } catch (err) {

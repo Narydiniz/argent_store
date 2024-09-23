@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 const authMiddleware = (req, res, next) => {
-  const token = req.header("Authorization").replace("Bearer ", ""); // Obtém o token do cabeçalho da requisição
+  const token = req.header("Authorization").replace("Bearer", ""); // Obtém o token do cabeçalho da requisição
     if (!token) {
     return res.status(401).send("Acesso negado. Nenhum token fornecido.");
   }
