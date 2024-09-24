@@ -13,11 +13,11 @@ const getAllVenda = (require, res) => {
 };
 //Função para adicionar produto ao carrinho
 
-const addVenda = (req, res) => {
-  const {data_compra, descricao, frete, forma_pagamento, estoque_id, quantidade, cadastro_id } = req.body;
+const addCarrinho = (req, res) => {
+  const {data_compra, descricao, frete, forma_pagamento, preco, estoque_id, quantidade } = req.body;
   db.query(
-    "INSERT INTO carrinho (data_compra, descricao, frete, forma_pagamento, estoque_id, quantidade, cadastro_id) VALUES (?, ?, ?, ?, ?, ?,?)",
-    [data_compra, descricao, frete, forma_pagamento, estoque_id, quantidade, cadastro_id],
+    "INSERT INTO carrinho (data_compra, descricao, frete, forma_pagamento, preco, estoque_id, quantidade ) VALUES (?, ?, ?, ?, ?, ?,?)",
+    [data_compra, descricao, frete, forma_pagamento, preco, estoque_id, quantidade],
     (err, results) => {
       if (err) {
         console.error("Erro ao adicionar produto ao carrinho:", err);
@@ -29,68 +29,69 @@ const addVenda = (req, res) => {
   );
 };
 
-//'SELECT * FROM carrinho WHERE data_compra=?, AND descricao=? AND frete=? AND forma_pagamento=? AND estoque_id=? AND quantidade=?',
-//[ data_compra, descricao, frete, forma_pagamento, estoque_id, quantidade, cadastro_id ],
+//Função para atualizar uma carrinho existente (substituição completa)
+const putCarrinho = (req, res) => {
+    const { id } = req.params;
+    const { data_compra, descricao, frete, forma_pagamento, estoque_id, quantidade, cadastro_id} = req.body;
+    db.query(
+      'UPDATE cariinho SET data_compra=?,  descricao=?, frete=?, forma_pagaento=?, estoque_id=?, quantidade=?, cadastro_id=? WHERE id=?',
+      [data_compra, descricao, frete, forma_pagamento, estoque_id, quantidade, cadastro_id, id],
+      (err, results) => {
+        if (err) {
+          console.error('Erro ao subestituir o produto no carrinho', err);
+          res.status(500).send('Erro ao substituir o produto no carrinho');
+          return;
+        }
+        res.send('Dados do produto atualizado com sucesso');
+      }
+    );
+  };
 
-// Função para atualizar uma transação existente (substituição completa)
-// const putEstoque = (req, res) => {
-//     const { id } = req.params;
-//     const { quant_estoque, descricao, categoria, preco_compra, cadastro_id} = req.body;
-//     db.query(
-//       'UPDATE estoque SET quant_estoque=?,  descricao=?, categoria=?, preco_compra=?, cadastro_id=? WHERE id=?',
-//       [quant_estoque, descricao, categoria, preco_compra, cadastro_id, id],
-//       (err, results) => {
-//         if (err) {
-//           console.error('Erro ao subestituir o produto do estoque', err);
-//           res.status(500).send('Erro ao substituir o produto do estoque');
-//           return;
-//         }
-//         res.send('Dados do produto atualizado com sucesso');
-//       }
-//     );
-//   };
+  // Função para atualizar uma transação existente (atualização parcial)
+  const updateCarrinho = (req, res) => {
+    const { id } = req.params;
+    const fields = req.body;
+    const query = [];
+    const values = [];
 
-//   // Função para atualizar uma transação existente (atualização parcial)
-//   const updateEstoque = (req, res) => {
-//     const { id } = req.params;
-//     const fields = req.body;
-//     const query = [];
-//     const values = [];
+    for (const [key, value] of Object.entries(fields)) {
+      query.push(`${key} = ?`);
+      values.push(value);
+    }
 
-//     for (const [key, value] of Object.entries(fields)) {
-//       query.push(`${key} = ?`);
-//       values.push(value);
-//     }
+    values.push(id);
 
-//     values.push(id);
+    db.query(
+      `UPDATE carrinho SET ${query.join(', ')} WHERE id = ?`, values,
+      (err, results) => {
+        if (err) {
+          console.error('Erro ao atualizar dado do produto no carrinho:', err);
+          res.status(500).send('Erro ao atualizar dado do produto no carrinho');
+          return;
+        }
+        res.send(' Dados do produto atualizados com sucesso');
+      }
+    );
+  };
 
-//     db.query(
-//       `UPDATE estoque SET ${query.join(', ')} WHERE id = ?`, values,
-//       (err, results) => {
-//         if (err) {
-//           console.error('Erro ao atualizar dado do produto em estoque:', err);
-//           res.status(500).send('Erro ao atualizar dado do produto em estoque');
-//           return;
-//         }
-//         res.send(' Dados do produto atualizados com sucesso');
-//       }
-//     );
-//   };
-
-// Função para deletar uma transação existente
-// const deleteEstoque= (req, res) => {
-//     const { id } = req.params;
-//     db.query('DELETE FROM estoque WHERE id = ?', [id], (err, results) => {
-//       if (err) {
-//         console.error('Erro ao deletar produto do estoque:', err);
-//         res.status(500).send('Erro ao deletar produto do estoque');
-//         return;
-//       }
-//       res.send('Produto do estoque deletado com sucesso');
-//     });
-//   };
+//Função para deletar uma transação existente
+const deleteCarrinho= (req, res) => {
+    const { id } = req.params;
+    db.query('DELETE FROM carrinho WHERE id = ?', [id], (err, results) => {
+      if (err) {
+        console.error('Erro ao deletar produto do carrinho:', err);
+        res.status(500).send('Erro ao deletar produto do carrinho');
+        return;
+      }
+      res.send('Produto do carrinho deletado com sucesso');
+    });
+  };
 
 module.exports = {
   getAllVenda,
-  addVenda,
+  addCarrinho,
+  putCarrinho,
+  updateCarrinho,
+  deleteCarrinho
+  
 };

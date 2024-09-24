@@ -7,16 +7,16 @@ const carrinhoController = require('../controllers/carrinhoController'); // Impo
 router.get('/', carrinhoController.getAllVenda); 
 
 // Definindo uma rota para adicionar uma nova venda 
-router.post('/',  carrinhoController.addVenda); 
+router.post('/',  carrinhoController.addCarrinho); 
 
 //Rota para a atualização completa do produto 
-//router.put('/:id',  authMiddleware, estoqueController.putEstoque);
+router.put('/:id', carrinhoController.putCarrinho);
 
 //Rota para a atualização parcial do produto
-//router.patch('/:id', authMiddleware,  estoqueController.updateEstoque); 
+router.patch('/:id', carrinhoController.updateCarrinho); 
 
 //Rota para deletar um produto 
-//router.delete('/:id', authMiddleware, estoqueController.deleteEstoque);
+router.delete('/:id',carrinhoController.deleteCarrinho);
 
 
 
