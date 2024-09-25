@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 8.0.38, for Win64 (x86_64)
 --
--- Host: localhost    Database: argent_store_db
+-- Host: localhost    Database: argentstore_db
 -- ------------------------------------------------------
--- Server version	8.0.39
+-- Server version	8.0.38
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,33 +16,28 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `produto`
+-- Table structure for table `produtos`
 --
 
-DROP TABLE IF EXISTS `produto`;
+DROP TABLE IF EXISTS `produtos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `produto` (
+CREATE TABLE `produtos` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `nome` varchar(150) NOT NULL,
-  `descricao` varchar(150) DEFAULT NULL,
-  `preco_venda` decimal(10,2) DEFAULT NULL,
-  `categoria` varchar(50) DEFAULT NULL,
-  `estoque_id` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `estoque_id` (`estoque_id`),
-  CONSTRAINT `produto_ibfk_1` FOREIGN KEY (`estoque_id`) REFERENCES `estoque` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `descricao` varchar(255) DEFAULT NULL,
+  `categoria` varchar(255) DEFAULT NULL,
+  `preco` decimal(10,2) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `produto`
+-- Dumping data for table `produtos`
 --
 
-LOCK TABLES `produto` WRITE;
-/*!40000 ALTER TABLE `produto` DISABLE KEYS */;
-INSERT INTO `produto` VALUES (1,'Argola','Argola cravejada 3 fileiras',90.00,'Brincos',1),(2,'Pulseira','Pulseira de bolinha e coração vazado',105.00,'Pulsseiras',1),(3,'Anel','Anel olho grego',65.00,'Aneis',1),(4,'Choker','Choker laminada',115.00,'Colares',1);
-/*!40000 ALTER TABLE `produto` ENABLE KEYS */;
+LOCK TABLES `produtos` WRITE;
+/*!40000 ALTER TABLE `produtos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `produtos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -54,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-09-23 16:43:34
+-- Dump completed on 2024-09-25  9:45:04

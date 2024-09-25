@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 8.0.38, for Win64 (x86_64)
 --
--- Host: localhost    Database: argent_store_db
+-- Host: localhost    Database: argentstore_db
 -- ------------------------------------------------------
--- Server version	8.0.39
+-- Server version	8.0.38
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,34 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `carrinho`
+-- Table structure for table `estoque`
 --
 
-DROP TABLE IF EXISTS `carrinho`;
+DROP TABLE IF EXISTS `estoque`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `carrinho` (
+CREATE TABLE `estoque` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `data_compra` int NOT NULL,
-  `descricao` varchar(255) NOT NULL,
-  `frete` int NOT NULL,
-  `forma_pagamento` varchar(255) NOT NULL,
-  `preco` decimal(10,2) NOT NULL,
-  `estoque_id` int DEFAULT NULL,
-  `quantidade` int NOT NULL,
+  `quant_estoque` int DEFAULT NULL,
+  `data_entrada` varchar(15) DEFAULT NULL,
+  `valor_compra` decimal(10,2) DEFAULT NULL,
+  `fornecedor` varchar(50) DEFAULT NULL,
+  `produtos_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `estoque_id` (`estoque_id`),
-  CONSTRAINT `carrinho_ibfk_1` FOREIGN KEY (`estoque_id`) REFERENCES `estoque` (`id`)
+  KEY `produtos_id` (`produtos_id`),
+  CONSTRAINT `estoque_ibfk_1` FOREIGN KEY (`produtos_id`) REFERENCES `produtos` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `carrinho`
+-- Dumping data for table `estoque`
 --
 
-LOCK TABLES `carrinho` WRITE;
-/*!40000 ALTER TABLE `carrinho` DISABLE KEYS */;
-/*!40000 ALTER TABLE `carrinho` ENABLE KEYS */;
+LOCK TABLES `estoque` WRITE;
+/*!40000 ALTER TABLE `estoque` DISABLE KEYS */;
+/*!40000 ALTER TABLE `estoque` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -55,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-09-23 16:43:34
+-- Dump completed on 2024-09-25  9:45:04

@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 8.0.38, for Win64 (x86_64)
 --
--- Host: localhost    Database: argent_store_db
+-- Host: localhost    Database: argentstore_db
 -- ------------------------------------------------------
--- Server version	8.0.39
+-- Server version	8.0.38
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,33 +16,35 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `estoque`
+-- Table structure for table `carrinho`
 --
 
-DROP TABLE IF EXISTS `estoque`;
+DROP TABLE IF EXISTS `carrinho`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `estoque` (
+CREATE TABLE `carrinho` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `quant_estoque` int NOT NULL,
-  `descricao` varchar(255) NOT NULL,
-  `categoria` varchar(255) NOT NULL,
-  `preco_compra` decimal(10,2) NOT NULL,
+  `data_compra` varchar(15) DEFAULT NULL,
+  `forma_pagamento` varchar(20) DEFAULT NULL,
+  `quantidade` int DEFAULT NULL,
+  `total_compra` decimal(10,2) DEFAULT NULL,
+  `estoque_id` int DEFAULT NULL,
   `cadastro_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
+  KEY `estoque_id` (`estoque_id`),
   KEY `cadastro_id` (`cadastro_id`),
-  CONSTRAINT `estoque_ibfk_1` FOREIGN KEY (`cadastro_id`) REFERENCES `cadastro` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `carrinho_ibfk_1` FOREIGN KEY (`estoque_id`) REFERENCES `estoque` (`id`),
+  CONSTRAINT `carrinho_ibfk_2` FOREIGN KEY (`cadastro_id`) REFERENCES `cadastro` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `estoque`
+-- Dumping data for table `carrinho`
 --
 
-LOCK TABLES `estoque` WRITE;
-/*!40000 ALTER TABLE `estoque` DISABLE KEYS */;
-INSERT INTO `estoque` VALUES (1,3,'Aliança Lisboa','Alianças',500.00,1),(2,10,'Pulseira de bolinha e coração vazado','Pulsseiras',620.00,1),(3,13,'Anel olho grego','Aneis',490.00,1),(4,10,'Gravatinha 2 pontos de luz','Colares',1250.00,1),(5,6,'Pulseira pandora fecho tradicional','Pulseira',1000.00,5);
-/*!40000 ALTER TABLE `estoque` ENABLE KEYS */;
+LOCK TABLES `carrinho` WRITE;
+/*!40000 ALTER TABLE `carrinho` DISABLE KEYS */;
+/*!40000 ALTER TABLE `carrinho` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -54,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-09-23 16:43:34
+-- Dump completed on 2024-09-25  9:45:04
