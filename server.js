@@ -18,11 +18,13 @@ app.use(bodyParser.json()); // Configura o body-parser para analisar requisiçõ
 const produtosRouters = require('./routes/produtos'); // Importa as rotas de produtos
 const authRoutes = require('./routes/auth'); // Importa as rotas de autenticação 
 const carrinhoRotes = require('./routes/carrinho'); // Importa as rotas do carrinho
+const estoqueRoutersRotes = require('./routes/estoque'); // Importa as rotas de produtos
 
 // Usar as rotas de transações e autenticação para as requisições 
 app.use('/api/produtos', produtosRouters); // Usar as rotas de transações para todas as requisições que começam com /api/transactions
 app.use('/api/auth', authRoutes); // Configura o servidor para usar as rotas de autenticação
 app.use('/api/carrinho', carrinhoRotes); // Configura o servidor para usar as rotas do carrinho
+app.use('/api/estoque', estoqueRoutersRotes); // Configura o servidor para usar as rotas do carrinho
 
 //Rota inicial para testar o servidor 
 
