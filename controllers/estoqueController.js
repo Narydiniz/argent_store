@@ -19,8 +19,8 @@ const addEstoque = (req, res) => {
     //Verificar se a transação já existe
 
     db.query(
-        'SELECT * FROM estoque WHERE quant_estoque =?,data_entrada =?,valor_compra =?,fornecedor =?,produtos_id =? ',
-        [quant_estoque,data_entrada,valor_compra,fornecedor,produtos_id ],
+        'SELECT * FROM estoque WHERE quant_estoque=? AND data_entrada =? AND valor_compra =? AND fornecedor =? AND produtos_id =? ',
+        [quant_estoque ,data_entrada,valor_compra,fornecedor,produtos_id ],
         (err, results) => {
             if (err) {
                 console.error('Erro ao adicionar transação', err);
@@ -32,7 +32,6 @@ const addEstoque = (req, res) => {
                 //se a transação já existe
                 res.status(400).send('Transação duplicada')
             }
-
 
             // Se a transação não existe, insira-a no banco de dados 
             db.query(
@@ -58,11 +57,11 @@ const putEstoque = (req, res) => {
     const { id } = req.params;
     const { quant_estoque,data_entrada,valor_compra,fornecedor,produtos_id } = req.body;
     db.query(
-      'UPDATE estoque SET quant_estoque=?,  descricao=?, categoria=?, preco_compra=?, cadastro_id=? WHERE id=?',
-      [quant_estoque,data_entrada,valor_compra,fornecedor,produtos_id ], 
+      'UPDATE estoque SET quant_estoque = ?,  data_entrada =?, valor_compra = ?, fornecedor = ?, produtos_id = ? WHERE id = ?',
+      [quant_estoque,data_entrada,valor_compra,fornecedor,produtos_id, id], 
       (err, results) => {
         if (err) {
-          console.error('Erro ao subestituir o produto do estoque', err);
+          console.error('Erro ao subestituir o produto do estoque', err); 
           res.status(500).send('Erro ao substituir o produto do estoque');
           return;
         }

@@ -34,8 +34,8 @@ const putCarrinho = (req, res) => {
     const { id } = req.params;
     const { data_compra,forma_pagamento,quantidade,total_compra, produtos_id,cadastro_id} = req.body;
     db.query(
-      'UPDATE cariinho SET data_compra=?,forma_pagamento=?,quantidade=?, total_compra=?,produtos_id=?,cadastro_id=? WHERE id=?',
-      [data_compra,forma_pagamento,quantidade,total_compra, produtos_id,cadastro_id],
+      'UPDATE carrinho SET data_compra=?,forma_pagamento=?,quantidade=?, total_compra=?,produtos_id=?,cadastro_id=? WHERE id=?',
+      [data_compra,forma_pagamento,quantidade,total_compra, produtos_id,cadastro_id,id],
       (err, results) => {
         if (err) {
           console.error('Erro ao subestituir o produto no carrinho', err);

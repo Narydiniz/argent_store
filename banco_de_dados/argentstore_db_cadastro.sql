@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: argentstore_db
 -- ------------------------------------------------------
--- Server version	8.0.38
+-- Server version	8.0.39
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -35,7 +35,7 @@ CREATE TABLE `cadastro` (
   `reset_password_expires` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,6 +44,7 @@ CREATE TABLE `cadastro` (
 
 LOCK TABLES `cadastro` WRITE;
 /*!40000 ALTER TABLE `cadastro` DISABLE KEYS */;
+INSERT INTO `cadastro` VALUES (1,'Ana','Silva','Anasilvaphb@gmail.com','86994986123','2000-03-23','64218-800','$2b$10$KuEBdZ1.id1LMbAS/kq9neZDv4npsNeDP8UqA/dQU8JCU75EI1Jiy',NULL,NULL),(2,'Naryara','Diniz','senainaryara@gmail.com','86994987123','2002-03-01','64218-800','$2b$10$3JV/sIzVVLGCXSZ/gTzuQ.BddUAloOQoR9fXY6T7okgtGMk9T7ima','32ddc61237d722e81eb1614e76b3cacd77807a34','2024-09-26 22:47:37');
 /*!40000 ALTER TABLE `cadastro` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-09-25  9:45:04
+-- Dump completed on 2024-09-26 21:54:34

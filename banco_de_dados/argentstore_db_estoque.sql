@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: argentstore_db
 -- ------------------------------------------------------
--- Server version	8.0.38
+-- Server version	8.0.39
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -32,7 +32,7 @@ CREATE TABLE `estoque` (
   PRIMARY KEY (`id`),
   KEY `produtos_id` (`produtos_id`),
   CONSTRAINT `estoque_ibfk_1` FOREIGN KEY (`produtos_id`) REFERENCES `produtos` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,6 +41,7 @@ CREATE TABLE `estoque` (
 
 LOCK TABLES `estoque` WRITE;
 /*!40000 ALTER TABLE `estoque` DISABLE KEYS */;
+INSERT INTO `estoque` VALUES (1,9,'2023-12-15',925.00,'Cliente X',1),(2,3,'2024-01-16',500.00,'Cliente Y',1),(3,10,'2024-03-01',620.00,'Cliente Z',1),(4,14,'2024-04-23',580.00,'Cliente C',1),(5,10,'2024-02-25',1250.00,'Cliente M',1),(6,12,'2024-04-29',1000.00,'Cliente N',1);
 /*!40000 ALTER TABLE `estoque` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-09-25  9:45:04
+-- Dump completed on 2024-09-26 21:54:34
