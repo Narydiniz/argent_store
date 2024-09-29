@@ -39,7 +39,7 @@ const putCarrinho = (req, res) => {
       (err, results) => {
         if (err) {
           console.error('Erro ao subestituir o produto no carrinho', err);
-          res.status(500).send('Erro ao substituir o produto no carrinho');
+          res.status(500).send('Erro ao substituir o produto no carrinho'+ err);
           return;
         }
         res.send('Dados do produto atualizado com sucesso');
