@@ -26,7 +26,7 @@ CREATE TABLE `produtos` (
   `id` int NOT NULL AUTO_INCREMENT,
   `descricao` varchar(255) DEFAULT NULL,
   `categoria` varchar(255) DEFAULT NULL,
-  `preco` decimal(10,2) DEFAULT NULL,
+  `preco_venda` decimal(10,2) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -50,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-09-26 21:54:34
+-- Dump completed on 2024-09-30 16:06:58

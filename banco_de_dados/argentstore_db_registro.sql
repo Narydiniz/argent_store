@@ -16,13 +16,13 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `cadastro`
+-- Table structure for table `registro`
 --
 
-DROP TABLE IF EXISTS `cadastro`;
+DROP TABLE IF EXISTS `registro`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `cadastro` (
+CREATE TABLE `registro` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nome` varchar(255) DEFAULT NULL,
   `sobrenome` varchar(255) DEFAULT NULL,
@@ -39,13 +39,13 @@ CREATE TABLE `cadastro` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `cadastro`
+-- Dumping data for table `registro`
 --
 
-LOCK TABLES `cadastro` WRITE;
-/*!40000 ALTER TABLE `cadastro` DISABLE KEYS */;
-INSERT INTO `cadastro` VALUES (1,'Ana','Silva','Anasilvaphb@gmail.com','86994986123','2000-03-23','64218-800','$2b$10$KuEBdZ1.id1LMbAS/kq9neZDv4npsNeDP8UqA/dQU8JCU75EI1Jiy',NULL,NULL),(2,'Naryara','Diniz','senainaryara@gmail.com','86994987123','2002-03-01','64218-800','$2b$10$3JV/sIzVVLGCXSZ/gTzuQ.BddUAloOQoR9fXY6T7okgtGMk9T7ima','32ddc61237d722e81eb1614e76b3cacd77807a34','2024-09-26 22:47:37');
-/*!40000 ALTER TABLE `cadastro` ENABLE KEYS */;
+LOCK TABLES `registro` WRITE;
+/*!40000 ALTER TABLE `registro` DISABLE KEYS */;
+INSERT INTO `registro` VALUES (1,'Ana','Silva','Anasilvaphb@gmail.com','86994986123','2000-03-23','64218-800','$2b$10$KuEBdZ1.id1LMbAS/kq9neZDv4npsNeDP8UqA/dQU8JCU75EI1Jiy',NULL,NULL),(2,'Naryara','Diniz','senainaryara@gmail.com','86994987123','2002-03-01','64218-800','$2b$10$3JV/sIzVVLGCXSZ/gTzuQ.BddUAloOQoR9fXY6T7okgtGMk9T7ima','32ddc61237d722e81eb1614e76b3cacd77807a34','2024-09-26 22:47:37');
+/*!40000 ALTER TABLE `registro` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -57,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-09-26 21:54:34
+-- Dump completed on 2024-09-30 16:06:58

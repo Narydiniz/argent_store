@@ -16,36 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `carrinho`
+-- Table structure for table `compras`
 --
 
-DROP TABLE IF EXISTS `carrinho`;
+DROP TABLE IF EXISTS `compras`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `carrinho` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `data_compra` varchar(15) DEFAULT NULL,
-  `forma_pagamento` varchar(20) DEFAULT NULL,
+CREATE TABLE `compras` (
+  `endereco` varchar(255) DEFAULT NULL,
   `quantidade` int DEFAULT NULL,
-  `total_compra` decimal(10,2) DEFAULT NULL,
+  `preco` decimal(10,2) DEFAULT NULL,
   `produtos_id` int DEFAULT NULL,
-  `cadastro_id` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
+  `registro_id` int DEFAULT NULL,
   KEY `produtos_id` (`produtos_id`),
-  KEY `cadastro_id` (`cadastro_id`),
-  CONSTRAINT `carrinho_ibfk_1` FOREIGN KEY (`produtos_id`) REFERENCES `produtos` (`id`),
-  CONSTRAINT `carrinho_ibfk_2` FOREIGN KEY (`cadastro_id`) REFERENCES `registro` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `registro_id` (`registro_id`),
+  CONSTRAINT `compras_ibfk_1` FOREIGN KEY (`produtos_id`) REFERENCES `produtos` (`id`),
+  CONSTRAINT `compras_ibfk_2` FOREIGN KEY (`registro_id`) REFERENCES `registro` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `carrinho`
+-- Dumping data for table `compras`
 --
 
-LOCK TABLES `carrinho` WRITE;
-/*!40000 ALTER TABLE `carrinho` DISABLE KEYS */;
-INSERT INTO `carrinho` VALUES (1,'2024-09-26','Dinheiro',2,150.00,1,1);
-/*!40000 ALTER TABLE `carrinho` ENABLE KEYS */;
+LOCK TABLES `compras` WRITE;
+/*!40000 ALTER TABLE `compras` DISABLE KEYS */;
+/*!40000 ALTER TABLE `compras` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
