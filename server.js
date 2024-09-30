@@ -15,16 +15,20 @@ app.use(cors()); // Habilita o CORS para todas as rotas
 app.use(bodyParser.json()); // Configura o body-parser para analisar requisições JSON
 
 // Importar as rotas de transações e autenticação 
-const produtosRouters = require('./routes/produtos'); // Importa as rotas de produtos
+const produtosRoutes = require('./routes/produtos'); // Importa as rotas de produtos
 const authRoutes = require('./routes/auth'); // Importa as rotas de autenticação 
-const carrinhoRotes = require('./routes/carrinho'); // Importa as rotas do carrinho
-const estoqueRoutersRotes = require('./routes/estoque'); // Importa as rotas de produtos
+const carrinhoRoutes = require('./routes/carrinho'); // Importa as rotas do carrinho
+const estoqueRoutes = require('./routes/estoque'); // Importa as rotas de estoque
+const comprasRoutes = require ('./routes/compras'); //Importa as rotas de compras
+
 
 // Usar as rotas de transações e autenticação para as requisições 
-app.use('/api/produtos', produtosRouters); // Usar as rotas de transações para todas as requisições que começam com /api/transactions
+app.use('/api/produtos', produtosRoutes); // Usar as rotas de transações para todas as requisições que começam com /api/transactions
 app.use('/api/auth', authRoutes); // Configura o servidor para usar as rotas de autenticação
-app.use('/api/carrinho', carrinhoRotes); // Configura o servidor para usar as rotas do carrinho
-app.use('/api/estoque', estoqueRoutersRotes); // Configura o servidor para usar as rotas do carrinho
+app.use('/api/carrinho', carrinhoRoutes); // Configura o servidor para usar as rotas do carrinho
+app.use('/api/estoque', estoqueRoutes); // Configura o servidor para usar as rotas do estoque
+app.use('/api/compras',comprasRoutes); // Configura o servidor para usar as rotas das compras
+
 
 //Rota inicial para testar o servidor 
 
