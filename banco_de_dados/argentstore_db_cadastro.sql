@@ -16,34 +16,36 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `compras`
+-- Table structure for table `cadastro`
 --
 
-DROP TABLE IF EXISTS `compras`;
+DROP TABLE IF EXISTS `cadastro`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `compras` (
-  `endereco` varchar(255) DEFAULT NULL,
-  `quantidade` int DEFAULT NULL,
-  `preco` decimal(10,2) DEFAULT NULL,
-  `produtos_id` int DEFAULT NULL,
-  `registro_id` int DEFAULT NULL,
-  `id` int DEFAULT NULL,
-  KEY `produtos_id` (`produtos_id`),
-  KEY `registro_id` (`registro_id`),
-  CONSTRAINT `compras_ibfk_1` FOREIGN KEY (`produtos_id`) REFERENCES `produtos` (`id`),
-  CONSTRAINT `compras_ibfk_2` FOREIGN KEY (`registro_id`) REFERENCES `registro` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `cadastro` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nome` varchar(255) DEFAULT NULL,
+  `sobrenome` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `telefone` char(25) DEFAULT NULL,
+  `data_nascimento` date DEFAULT NULL,
+  `cep` varchar(255) DEFAULT NULL,
+  `senha` varchar(255) DEFAULT NULL,
+  `reset_password_token` varchar(255) DEFAULT NULL,
+  `reset_password_expires` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `compras`
+-- Dumping data for table `cadastro`
 --
 
-LOCK TABLES `compras` WRITE;
-/*!40000 ALTER TABLE `compras` DISABLE KEYS */;
-INSERT INTO `compras` VALUES ('Rua Argentina, N° 990',2,180.00,2,1,NULL),('Rua França, N° 780',1,120.00,6,2,NULL);
-/*!40000 ALTER TABLE `compras` ENABLE KEYS */;
+LOCK TABLES `cadastro` WRITE;
+/*!40000 ALTER TABLE `cadastro` DISABLE KEYS */;
+INSERT INTO `cadastro` VALUES (1,'Ana','Silva','Anasilvaphb@gmail.com','86994986123','2000-03-23','64218-800','$2b$10$KuEBdZ1.id1LMbAS/kq9neZDv4npsNeDP8UqA/dQU8JCU75EI1Jiy',NULL,NULL),(2,'Naryara','Diniz','senainaryara@gmail.com','86994987123','2002-03-01','64218-800','$2b$10$3JV/sIzVVLGCXSZ/gTzuQ.BddUAloOQoR9fXY6T7okgtGMk9T7ima','32ddc61237d722e81eb1614e76b3cacd77807a34','2024-09-26 22:47:37');
+/*!40000 ALTER TABLE `cadastro` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -55,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-02  8:31:03
+-- Dump completed on 2024-10-02  8:31:02

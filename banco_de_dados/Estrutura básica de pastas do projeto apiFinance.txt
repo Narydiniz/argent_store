@@ -1,0 +1,37 @@
+apiFiance/ 
+├── config/ 
+│ └── db.js
+├── controllers/ 
+│ └── authController.js
+│ └── transactionsController.js
+├── middlewares/ 
+│ └── authMiddleware.js
+├── node_modules/ 
+├── public/ 
+│ ├── images/
+│ │  └── facebook.svg
+│ │  └── favicon.svg
+│ │  └── finances.png
+│ │  └── instagram.svg
+│ │  └── logo.svg
+│ │  └── tabletb.png
+│ │  └── youtube.svg
+│ │── api.js
+│ │── index.html
+│ │── login.html
+│ │── registrar.html
+│ │── sisfsgpe.html
+│ │── sobre.html
+│ └── style.css
+├── routes/ 
+│ └── auth.js
+│ └── transactions.js
+├── services/ 
+│ └── emailService.js
+├── .env
+├── .gitignore
+├── package.json 
+├── package-lock.json 
+├── README
+├── server.js 
+ 
