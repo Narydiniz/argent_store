@@ -14,10 +14,10 @@ const getAllVenda = (require, res) => {
 //Função para adicionar produto ao carrinho
 
 const addCarrinho = (req, res) => {
-  const {data_compra,forma_pagamento,quantidade,total_compra, produtos_id,cadastro_id } = req.body;
+  const {data_compra,forma_pagamento,quantidade,total_compra, produtos_id,registro_id } = req.body;
   db.query(
-    "INSERT INTO carrinho (data_compra,forma_pagamento,quantidade,total_compra, produtos_id,cadastro_id ) VALUES (?, ?, ?, ?, ?, ?)",
-    [data_compra,forma_pagamento,quantidade,total_compra, produtos_id,cadastro_id],
+    "INSERT INTO carrinho (data_compra,forma_pagamento,quantidade,total_compra, produtos_id,registro_id ) VALUES (?, ?, ?, ?, ?, ?)",
+    [data_compra,forma_pagamento,quantidade,total_compra, produtos_id,registro_id],
     (err, results) => {
       if (err) {
         console.error("Erro ao adicionar produto ao carrinho:", err);
@@ -32,10 +32,10 @@ const addCarrinho = (req, res) => {
 //Função para atualizar uma carrinho existente (substituição completa)
 const putCarrinho = (req, res) => {
     const { id } = req.params;
-    const { data_compra,forma_pagamento,quantidade,total_compra, produtos_id,cadastro_id} = req.body;
+    const { data_compra,forma_pagamento,quantidade,total_compra, produtos_id,registro_id} = req.body;
     db.query(
-      'UPDATE carrinho SET data_compra=?,forma_pagamento=?,quantidade=?, total_compra=?,produtos_id=?,cadastro_id=? WHERE id=?',
-      [data_compra,forma_pagamento,quantidade,total_compra, produtos_id,cadastro_id,id],
+      'UPDATE carrinho SET data_compra=?,forma_pagamento=?,quantidade=?, total_compra=?,produtos_id=?,registro_id=? WHERE id=?',
+      [data_compra,forma_pagamento,quantidade,total_compra, produtos_id,registro_id,id],
       (err, results) => {
         if (err) {
           console.error('Erro ao subestituir o produto no carrinho', err);

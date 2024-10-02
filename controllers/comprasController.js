@@ -58,12 +58,12 @@ const putCompras = (req, res) => {
     const { id } = req.params;
     const {endereco,quantidade,preco, produtos_id,registro_id} = req.body;
     db.query(
-      'UPDATE produtos SET  endereco=?,quantidade=?, preco=?, produtos_id= ?, registro_id WHERE id=?',
-      [endereco,quantidade,preco, produtos_id,registro_id], 
+      'UPDATE compras SET  endereco=?, quantidade=?, preco=?, produtos_id=?, registro_id=? WHERE id=?',
+      [endereco,quantidade,preco, produtos_id,registro_id,id], 
       (err, results) => {
         if (err) {
           console.error('Erro ao subestituir compra ', err);
-          res.status(500).send('Erro ao substituir compra');
+          res.status(500).send('Erro ao substituir compra'+ err);
           return;
         }
         res.send('Dados da compra atualizados com sucesso!');
@@ -102,7 +102,7 @@ const putCompras = (req, res) => {
 // Função para deletar uma transação existente 
 const deleteCompras = (req, res) => { 
     const { id } = req.params; 
-    db.query('DELETE FROM compra WHERE id = ?', [id], (err, results) => { 
+    db.query('DELETE FROM compras WHERE id = ?', [id], (err, results) => { 
       if (err) { 
         console.error('Erro ao deletar compra:', err); 
         res.status(500).send('Erro ao deletar compra'); 
