@@ -14,13 +14,13 @@ const getAllEstoque = (require, res) => {
 
 //Função para adicionar uma nova transação (Com verificação de Duplicidade)
 const addEstoque = (req, res) => {
-    const { quant_estoque,data_entrada,valor_compra,fornecedor,produtos_id  } = req.body;
+    const { quant_estoque,data_entrada,fornecedor,produtos_id  } = req.body;
 
     //Verificar se a transação já existe
 
     db.query(
-        'SELECT * FROM estoque WHERE quant_estoque=? AND data_entrada =? AND valor_compra =? AND fornecedor =? AND produtos_id =? ',
-        [quant_estoque ,data_entrada,valor_compra,fornecedor,produtos_id ],
+        'SELECT * FROM estoque WHERE quant_estoque=? AND data_entrada =? AND fornecedor =? AND produtos_id =? ',
+        [quant_estoque ,data_entrada,fornecedor,produtos_id ],
         (err, results) => {
             if (err) {
                 console.error('Erro ao adicionar transação', err);
@@ -35,8 +35,8 @@ const addEstoque = (req, res) => {
 
             // Se a transação não existe, insira-a no banco de dados 
             db.query(
-                'INSERT INTO estoque (quant_estoque,data_entrada,valor_compra,fornecedor,produtos_id ) VALUES  (?, ?, ?, ?, ?)',
-                [quant_estoque,data_entrada,valor_compra,fornecedor,produtos_id ],
+                'INSERT INTO estoque (quant_estoque,data_entrada,fornecedor,produtos_id ) VALUES  (?, ?, ?, ?)',
+                [quant_estoque,data_entrada,fornecedor,produtos_id ],
                 (err, results) => {
                     if (err) {
                         console.error('Erro ao adicionar novo produto no estoque', err);
@@ -55,10 +55,10 @@ const addEstoque = (req, res) => {
 // Função para atualizar uma transação existente (substituição completa) 
 const putEstoque = (req, res) => {
     const { id } = req.params;
-    const { quant_estoque,data_entrada,valor_compra,fornecedor,produtos_id } = req.body;
+    const { quant_estoque,data_entrada,fornecedor,produtos_id } = req.body;
     db.query(
-      'UPDATE estoque SET quant_estoque = ?,  data_entrada =?, valor_compra = ?, fornecedor = ?, produtos_id = ? WHERE id = ?',
-      [quant_estoque,data_entrada,valor_compra,fornecedor,produtos_id, id], 
+      'UPDATE estoque SET quant_estoque = ?,  data_entrada =?, fornecedor = ?, produtos_id = ? WHERE id = ?',
+      [quant_estoque,data_entrada,fornecedor,produtos_id, id], 
       (err, results) => {
         if (err) {
           console.error('Erro ao subestituir o produto do estoque', err); 

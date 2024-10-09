@@ -1,8 +1,8 @@
 const db = require('../config/db'); // Importa a conexão com o banco de dados 
 
 // Função para obter todas as transações 
-const  getAllCompras = (require, res) => {
-    db.query('SELECT * FROM compras', (err, results) => {
+const  getAllPedidos = (require, res) => {
+    db.query('SELECT * FROM pedidos', (err, results) => {
         if (err) {
             console.error('Erro ao obter todas as compras:', err);
             res.status(500).send('Erro ao obter todas as compras');
@@ -13,18 +13,18 @@ const  getAllCompras = (require, res) => {
 };
 
 //Função para adicionar uma nova transação (Com verificação de Duplicidade)
-const addCompras = (req, res) => {
-    const {endereco,quantidade,preco, produtos_id,registro_id} = req.body;
+const addPedidos = (req, res) => {
+    const {data_pagamento,status_pedido ,carrinho_id,produtos_id} = req.body;
 
     //Verificar se a transação já existe
 
     db.query(
-        'SELECT * FROM compras WHERE endereco=? AND quantidade=? AND preco=? AND produtos_id= ? AND registro_id',
-        [endereco,quantidade,preco, produtos_id,registro_id],
+        'SELECT * FROM pedidos WHERE data_pagamento=? AND status_pedido=? AND carrinho_id=? AND produtos_id= ?',
+        [data_pagamento,status_pedido ,carrinho_id,produtos_id],
         (err, results) => {
             if (err) {
-                console.error('Erro ao adicionar nova compra', err);
-                res.status(500).send('Erro ao adicionar nova compra');
+                console.error('Erro ao adicionar novo pedido', err);
+                res.status(500).send('Erro ao adicionar novo pedido');
                 return;
             }
 
@@ -36,15 +36,15 @@ const addCompras = (req, res) => {
 
             // Se a transação não existe, insira-a no banco de dados 
             db.query(
-                'INSERT INTO compras (endereco,quantidade,preco, produtos_id,registro_id) VALUES  (?, ?, ?, ?,? )',
-                [endereco,quantidade,preco, produtos_id,registro_id],
+                'INSERT INTO pedidos (data_pagamento,status_pedido ,carrinho_id,produtos_id) VALUES  (?, ?, ?, ? )',
+                [data_pagamento,status_pedido ,carrinho_id,produtos_id],
                 (err, results) => {
                     if (err) {
-                        console.error('Erro ao adicionar nova comprra', err);
-                        res.status(500).send('Erro ao adicionar nova compra');
+                        console.error('Erro ao adicionar novo pedido', err);
+                        res.status(500).send('Erro ao adicionar novo pedido');
                         return;
                     }
-                    res.status(201).send('Nova compra adicionada');
+                    res.status(201).send('Novo pedido adicionado com sucesso!');
                 }
 
             );
@@ -54,26 +54,26 @@ const addCompras = (req, res) => {
 
 
 // Função para atualizar uma transação existente (substituição completa) 
-const putCompras = (req, res) => {
+const putPedidos = (req, res) => {
     const { id } = req.params;
-    const {endereco,quantidade,preco, produtos_id,registro_id} = req.body;
+    const {data_pagamento,status_pedido ,carrinho_id,produtos_id} = req.body;
     db.query(
-      'UPDATE compras SET  endereco=?, quantidade=?, preco=?, produtos_id=?, registro_id=? WHERE id=?',
-      [endereco,quantidade,preco, produtos_id,registro_id,id], 
+      'UPDATE pedidos SET data_pagamento=?, status_pedido=? ,carrinho_id=?, produtos_id=? WHERE id=?',
+      [data_pagamento,status_pedido ,carrinho_id,produtos_id,id], 
       (err, results) => {
         if (err) {
-          console.error('Erro ao subestituir compra ', err);
-          res.status(500).send('Erro ao substituir compra'+ err);
+          console.error('Erro ao subestituir pedido ', err);
+          res.status(500).send('Erro ao substituir pedido'+ err);
           return;
         }
-        res.send('Dados da compra atualizados com sucesso!');
+        res.send('Dados do pedido atualizados com sucesso!');
       }
     );
   };
    
    
   // Função para atualizar uma transação existente (atualização parcial) 
-  const updateCompras = (req, res) => { 
+  const updatePedidos = (req, res) => { 
     const { id } = req.params; 
     const fields = req.body; 
     const query = []; 
@@ -87,22 +87,22 @@ const putCompras = (req, res) => {
     values.push(id); 
    
     db.query( 
-      `UPDATE compras SET ${query.join(', ')} WHERE id = ?`, values, 
+      `UPDATE pedidos SET ${query.join(', ')} WHERE id = ?`, values, 
       (err, results) => { 
         if (err) { 
-          console.error('Erro ao atualizar compra:', err); 
+          console.error('Erro ao atualizar pedido:', err); 
           res.status(500).send('Erro ao atualizar compra'); 
           return; 
         } 
-        res.send('Dados da compra atualizados com sucesso!'); 
+        res.send('Dados do pedido atualizados com sucesso!'); 
       } 
     ); 
   };
 
 // Função para deletar uma transação existente 
-const deleteCompras = (req, res) => { 
+const deletePedidos = (req, res) => { 
     const { id } = req.params; 
-    db.query('DELETE FROM compras WHERE id = ?', [id], (err, results) => { 
+    db.query('DELETE FROM pedidos WHERE id = ?', [id], (err, results) => { 
       if (err) { 
         console.error('Erro ao deletar compra:', err); 
         res.status(500).send('Erro ao deletar compra'); 
@@ -114,9 +114,9 @@ const deleteCompras = (req, res) => {
    
  
 module.exports = {
-    getAllCompras,
-    addCompras,
-    putCompras,
-    updateCompras,
-    deleteCompras
+  getAllPedidos,
+  addPedidos,
+  putPedidos,
+  updatePedidos,
+  deletePedidos
   };

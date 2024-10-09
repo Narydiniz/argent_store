@@ -19,7 +19,7 @@ const produtosRoutes = require('./routes/produtos'); // Importa as rotas de prod
 const authRoutes = require('./routes/auth'); // Importa as rotas de autenticação 
 const carrinhoRoutes = require('./routes/carrinho'); // Importa as rotas do carrinho
 const estoqueRoutes = require('./routes/estoque'); // Importa as rotas de estoque
-const comprasRoutes = require ('./routes/compras'); //Importa as rotas de compras
+const pedidosRoutes = require ('./routes/pedidos'); //Importa as rotas de compras
 
 
 // Usar as rotas de transações e autenticação para as requisições 
@@ -27,7 +27,7 @@ app.use('/api/produtos', produtosRoutes); // Usar as rotas de transações para 
 app.use('/api/auth', authRoutes); // Configura o servidor para usar as rotas de autenticação
 app.use('/api/carrinho', carrinhoRoutes); // Configura o servidor para usar as rotas do carrinho
 app.use('/api/estoque', estoqueRoutes); // Configura o servidor para usar as rotas do estoque
-app.use('/api/compras',comprasRoutes); // Configura o servidor para usar as rotas das compras
+app.use('/api/pedidos',pedidosRoutes); // Configura o servidor para usar as rotas das compras
 
 
 //Rota inicial para testar o servidor 
