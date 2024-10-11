@@ -4,8 +4,8 @@ const db = require('../config/db'); // Importa a conexão com o banco de dados
 const  getAllPedidos = (require, res) => {
     db.query('SELECT * FROM pedidos', (err, results) => {
         if (err) {
-            console.error('Erro ao obter todas as compras:', err);
-            res.status(500).send('Erro ao obter todas as compras');
+            console.error('Erro ao obter todas as pedidos:', err);
+            res.status(500).send('Erro ao obter todas as pedidos');
             return;
         }
         res.json(results);

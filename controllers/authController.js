@@ -1,12 +1,12 @@
 const crypto = require('crypto')
 const db = require("../config/db"); // Importa a configuração do banco de dados
-const bcrypt = require("bcrypt"); // Importa o bcrypt para criptografar senhas
+const bcrypt = require("bcrypt"); // Importa o bcrypt para criptografar senhas dos usuarios 
 const jwt = require("jsonwebtoken"); // Importa o jsonwebtoken para gerar tokens JWT
 const sendEmail = require("../services/emailService").sendEmail;
 
 // Função para registrar um novo usuário
 const registerUser = async (req, res) => {
-  const { nome,sobrenome,email,telefone,data_nascimento, cep,senha } = req.body; // Desestrutura os dados do corpo da requisição
+  const { nome,sobrenome,email,telefone,data_nascimento, cep, endereco,senha } = req.body; // Desestrutura os dados do corpo da requisição
 
   // Verificar se o usuário já existe no banco de dados
   try {
@@ -21,8 +21,8 @@ const registerUser = async (req, res) => {
 
     // Inserir o novo usuário no banco de dados
     await db.promise().query(
-        "INSERT INTO registro (nome,sobrenome,email,telefone,data_nascimento,cep,senha) VALUES (?, ?, ?, ?,?,?,?)",
-        [nome,sobrenome,email,telefone,data_nascimento,cep,hashedPassword ]
+        "INSERT INTO registro ( nome,sobrenome,email,telefone,data_nascimento, cep, endereco,senha) VALUES (?, ?, ?, ?, ?, ? ,?, ?)",
+        [ nome,sobrenome,email,telefone,data_nascimento, cep, endereco,senha,hashedPassword ]
       );
     res.status(201).send("Usuário registrado com sucesso");
   } catch (err) {
@@ -32,7 +32,7 @@ const registerUser = async (req, res) => {
 };
 
 // Função para autenticar um usuário
-const loginUser = async (req, res) => {
+const loginRegistro = async (req, res) => {
   const { email, senha } = req.body; // Desestrutura os dados do corpo da requisição
 
   // Verificar se o usuário existe no banco de dados
@@ -60,7 +60,7 @@ const loginUser = async (req, res) => {
 };
 
 // Função para solicitar redefinição de senha
-const requestPasswordReset = async (req, res) => {
+const requestsenhaReset = async (req, res) => {
   const { email } = req.body;
   try {
     const [registro] = await db.promise().query("SELECT * FROM registro WHERE email = ?", [email]);
@@ -87,7 +87,7 @@ const requestPasswordReset = async (req, res) => {
 };
 
 // Função para redefinir a senha
-const resetPassword = async (req, res) => {
+const resetarSenha = async (req, res) => {
   const { token, newPassword } = req.body;
   try {
     const [registro] = await db.promise().query("SELECT * FROM registro WHERE reset_password_token = ? AND reset_password_expires > NOW()",
@@ -110,7 +110,7 @@ const resetPassword = async (req, res) => {
 
 module.exports = {
   registerUser,
-  loginUser,
-  requestPasswordReset,
-  resetPassword
+  loginRegistro,
+  requestsenhaReset,
+  resetarSenha
 };

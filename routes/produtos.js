@@ -5,19 +5,19 @@ const authMiddleware = require('../middleware/authMiddleware.js') // Importa o m
 
 
 // Definindo uma rota para obter todas as transações 
-router.get('/',  proddutosController.getAllProdutos); 
+router.get('/', authMiddleware,  proddutosController.getAllProdutos); 
 
 // Definindo uma rota para adicionar uma nova transação 
-router.post('/',  proddutosController.addProdutos); 
+router.post('/',  authMiddleware, proddutosController.addProdutos); 
 
 //Rota para a atualização completa do produto 
-router.put('/:id', proddutosController.putProdutos);
+router.put('/:id',  authMiddleware,proddutosController.putProdutos);
 
 //Rota para a atualização parcial do produto
-router.patch('/:id', proddutosController.updateProdutos); 
+router.patch('/:id', authMiddleware, proddutosController.updateProdutos); 
 
 //Rota para deletar um produto 
-router.delete('/:id', proddutosController.deleteProdutos);
+router.delete('/:id', authMiddleware, proddutosController.deleteProdutos);
 
 
 // Exportando o roteador 

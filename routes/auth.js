@@ -6,13 +6,15 @@ const authController = require('../controllers/authController'); // Importa o co
 router.post('/register', authController.registerUser); 
 
 // Rota para login de usuário 
-router.post('/login', authController.loginUser); 
+router.post('/login', authController.loginRegistro); 
 
 // Rota para solicitar redefinição de senha
-router.post('/request-password-reset', authController.requestPasswordReset);
+router.post('/request-password-reset', authController.requestsenhaReset);
 
 // Rota para redefinir a senha
-router.post('/reset-password', authController.resetPassword); 
+router.post('/reset-password', authController.resetarSenha); 
 
 
 module.exports = router; // Exporta o roteador 
+
+  

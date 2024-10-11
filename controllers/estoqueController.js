@@ -1,12 +1,12 @@
 const db = require('../config/db'); // Importa a conexão com o banco de dados 
 
-// Função para obter todas as transações 
+// Função para obter todas as transações de estoque
 const getAllEstoque = (require, res) => {
     db.query('SELECT * FROM estoque', (err, results) => {
         if (err) {
             console.error('Erro ao obter todos os produtos do estoque:', err);
-            res.status(500).send('Erro ao obter produtos');
-            return;
+            res.status(500).send('Erro ao obter produtos de estoque');
+        return;
         }
         res.json(results);
     });
@@ -23,14 +23,14 @@ const addEstoque = (req, res) => {
         [quant_estoque ,data_entrada,fornecedor,produtos_id ],
         (err, results) => {
             if (err) {
-                console.error('Erro ao adicionar transação', err);
-                res.status(500).send('Erro ao adicionar transação');
+                console.error('Erro ao adicionar produto ao estoque', err);
+                res.status(500).send('Erro ao adicionar produto ao estoque');
                 return;
             }
 
             if (results.length > 0) {
                 //se a transação já existe
-                res.status(400).send('Transação duplicada')
+                res.status(400).send('Produto duplicado')
             }
 
             // Se a transação não existe, insira-a no banco de dados 
