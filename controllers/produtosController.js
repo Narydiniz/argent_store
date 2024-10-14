@@ -14,13 +14,13 @@ const getAllProdutos = (require, res) => {
 
 //Função para adicionar uma nova transação (Com verificação de Duplicidade)
 const addProdutos = (req, res) => {
-    const {descricao,categoria, preco} = req.body;
+    const {descricao,categoria, preco_produto} = req.body;
 
     //Verificar se a transação já existe
 
     db.query(
-        'SELECT * FROM produtos WHERE descricao=? AND categoria=? AND preco=?',
-        [descricao,categoria, preco],
+        'SELECT * FROM produtos WHERE descricao=? AND categoria=? AND preco_produto=?',
+        [descricao,categoria, preco_produto],
         (err, results) => {
             if (err) {
                 console.error('Erro ao adicionar produto', err);
@@ -36,8 +36,8 @@ const addProdutos = (req, res) => {
 
             // Se a transação não existe, insira-a no banco de dados 
             db.query(
-                'INSERT INTO produtos (descricao,categoria, preco) VALUES  (?, ?, ?)',
-                [descricao,categoria, preco],
+                'INSERT INTO produtos (descricao,categoria, preco_produto) VALUES  (?, ?, ?)',
+                [descricao,categoria, preco_produto],
                 (err, results) => {
                     if (err) {
                         console.error('Erro ao adicionar novo produto', err);
@@ -56,10 +56,10 @@ const addProdutos = (req, res) => {
 // Função para atualizar uma transação existente (substituição completa) 
 const putProdutos = (req, res) => {
     const { id } = req.params;
-    const {descricao,categoria, preco} = req.body;
+    const {descricao,categoria, preco_produto} = req.body;
     db.query(
-      'UPDATE produtos SET  descricao=?, categoria=?, preco=? WHERE id=?',
-      [descricao,categoria, preco, id], 
+      'UPDATE produtos SET  descricao=?, categoria=?, preco_produto=? WHERE id=?',
+      [descricao,categoria, preco_produto, id], 
       (err, results) => {
         if (err) {
           console.error('Erro ao subestituir  produto ', err);

@@ -9,13 +9,13 @@ const authMiddleware = require('../middleware/authMiddleware.js') // Importa o m
 router.get('/', authMiddleware, carrinhoController.getAllVenda); 
 
 // Definindo uma rota para adicionar uma nova venda 
-router.post('/',  authMiddleware,  carrinhoController.addCarrinho); 
+router.post('/',  carrinhoController.addCarrinho); 
 
 //Rota para a atualização completa do produto 
-router.put('/:id', authMiddleware,  carrinhoController.putCarrinho);
+router.put('/:id',  carrinhoController.putCarrinho);
 
 //Rota para a atualização parcial do produto
-router.patch('/:id', authMiddleware,  carrinhoController.updateCarrinho); 
+router.patch('/:id',  carrinhoController.updateCarrinho); 
 
 //Rota para deletar um produto 
 router.delete('/:id', authMiddleware, carrinhoController.deleteCarrinho);

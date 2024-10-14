@@ -22,7 +22,7 @@ const registerUser = async (req, res) => {
     // Inserir o novo usuário no banco de dados
     await db.promise().query(
         "INSERT INTO registro ( nome,sobrenome,email,telefone,data_nascimento, cep, endereco,senha) VALUES (?, ?, ?, ?, ?, ? ,?, ?)",
-        [ nome,sobrenome,email,telefone,data_nascimento, cep, endereco,senha,hashedPassword ]
+        [ nome,sobrenome,email,telefone,data_nascimento, cep, endereco,hashedPassword ]
       );
     res.status(201).send("Usuário registrado com sucesso");
   } catch (err) {
@@ -38,18 +38,18 @@ const loginRegistro = async (req, res) => {
   // Verificar se o usuário existe no banco de dados
   try {
     const [registro] = await db.promise().query("SELECT * FROM registro WHERE email = ?",[email]);
-    if (user.length === 0) {
+    if (registro.length === 0) {
       return res.status(400).send("Credenciais inválidas (email inválido)");
     }
 
     // Comparar a senha fornecida com a senha criptografada no banco de dados
     const isMatch = await bcrypt.compare(senha, registro[0].senha);
     if (!isMatch) {
-      return res.status(400).send(" Credenciais inválidas (senha inválida)");
+      return res.status(400).send("Credenciais inválidas(senha incorreta)");
     }
 
     // Gerar um token JWT
-    const token = jwt.sign({ userId: user[0].id }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ registroId: registro[0].id }, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
     res.json({ token });
@@ -73,7 +73,7 @@ const requestsenhaReset = async (req, res) => {
       .promise().query( "UPDATE registro SET reset_password_token = ?, reset_password_expires = ? WHERE email = ?",
       [token, expireDate, email]
       );
-    const resetLink = `http://localhost:3000/reset-password/${token}`; // Link para redefinição de senha
+    const resetLink = `http://localhost:5000/reset-password/${token}`; // Link para redefinição de senha
     sendEmail(
       email,
       "Recuperação de Senha - Sistema da Argent Store",
@@ -99,7 +99,7 @@ const resetarSenha = async (req, res) => {
     const hashedPassword = await bcrypt.hash(newPassword, 10); // Criptografa a nova senha
     await db
       .promise().query("UPDATE registro SET senha = ?, reset_password_token = NULL, reset_password_expires = NULL WHERE id = ?",
-        [hashedPassword, user[0].id]
+        [hashedPassword, registro[0].id]
       );
     res.send("Senha redefinida com sucesso");
   } catch (err) {
