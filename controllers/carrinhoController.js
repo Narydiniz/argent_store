@@ -14,10 +14,10 @@ const getAllVenda = (require, res) => {
 //Função para adicionar produto ao carrinho
 
 const addCarrinho = (req, res) => {
-  const {data_compra,forma_pagamento,quantidade,total_compra,produtos_id } = req.body;
+  const {data_compra,forma_pagamento,quantidade,valor_final,produtos_id } = req.body;
   db.query(
-    "INSERT INTO carrinho (data_compra,forma_pagamento,quantidade,total_compra,produtos_id ) VALUES (?, ?, ?, ?, ?)",
-    [data_compra,forma_pagamento,quantidade,total_compra,produtos_id],
+    "INSERT INTO carrinho (data_compra,forma_pagamento,quantidade,valor_final,produtos_id ) VALUES (?, ?, ?, ?, ?)",
+    [data_compra,forma_pagamento,quantidade,valor_final,produtos_id],
     (err, results) => {
       if (err) {
         console.error("Erro ao adicionar produto ao carrinho:", err);
@@ -33,7 +33,7 @@ const addCarrinho = (req, res) => {
 // Função para atualizar uma transação existente (atualização completa)
   const putCarrinho = (req, res) => {
     const { id } = req.params;
-    const { data_compra, forma_pagamento, quantidade, produtos_id } = req.body;
+    const { data_compra, forma_pagamento, quantidade,produtos_id } = req.body;
   
    
 // Buscar o preço do produto no banco de dados ou em outro local
@@ -43,12 +43,12 @@ const addCarrinho = (req, res) => {
         return res.status(500).send('Erro ao buscar o preço do produto');
       }
   
-      const preco = results[0].preco_produto;
-      const total_compra = quantidade * preco
+      const preco_produto = results[0].preco_produto;
+      const valor_final = quantidade * preco_produto
   
       db.query(
-        'UPDATE carrinho SET data_compra=?, forma_pagamento=?, quantidade=?, total_compra=?, produtos_id=? WHERE id=?',
-        [data_compra, forma_pagamento, quantidade, total_compra, produtos_id, id],
+        'UPDATE carrinho SET data_compra=?, forma_pagamento=?, quantidade=?, valor_final=?, produtos_id=? WHERE id=?',
+        [data_compra, forma_pagamento, quantidade, valor_final, produtos_id, id],
         (err, results) => {
           if (err) {
             console.error('Erro ao atualizar o produto no carrinho', err);
