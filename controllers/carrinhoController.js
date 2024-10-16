@@ -16,7 +16,7 @@ const getAllVenda = (require, res) => {
 const addCarrinho = (req, res) => {
   const {data_compra,forma_pagamento,quantidade,valor_final,produtos_id } = req.body;
   db.query(
-    "INSERT INTO carrinho (data_compra,forma_pagamento,quantidade,valor_final,produtos_id ) VALUES (?, ?, ?, ?, ?)",
+    "INSERT INTO carrinho (data_compra,forma_pagamento,quantidade,valor_final, produtos_id ) VALUES (?, ?, ?, ?, ?)",
     [data_compra,forma_pagamento,quantidade,valor_final,produtos_id],
     (err, results) => {
       if (err) {
