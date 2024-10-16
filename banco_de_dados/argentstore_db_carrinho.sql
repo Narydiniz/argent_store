@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: argentstore_db
 -- ------------------------------------------------------
--- Server version	8.0.39
+-- Server version	8.0.38
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -30,9 +30,9 @@ CREATE TABLE `carrinho` (
   `valor_final` decimal(10,2) DEFAULT NULL,
   `produtos_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `produtos_id` (`produtos_id`),
-  CONSTRAINT `carrinho_ibfk_1` FOREIGN KEY (`produtos_id`) REFERENCES `produtos` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `carrinho_ibfk_1` (`produtos_id`),
+  CONSTRAINT `carrinho_ibfk_1` FOREIGN KEY (`produtos_id`) REFERENCES `registro` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `carrinho` (
 
 LOCK TABLES `carrinho` WRITE;
 /*!40000 ALTER TABLE `carrinho` DISABLE KEYS */;
-INSERT INTO `carrinho` VALUES (1,'2024-06-19','Credito',1,330.00,1),(2,'2024-09-26','Pix',2,150.00,2),(3,'2024-10-14','Credito',2,360.00,1),(9,'2024-10-14','Pix',2,360.00,3),(11,'2024-10-14','Credito',2,110.00,1);
+INSERT INTO `carrinho` VALUES (1,'2024-09-15','Pix',2,220.00,2),(2,'2024-09-30','Boleto',4,820.00,2);
 /*!40000 ALTER TABLE `carrinho` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-15 20:45:41
+-- Dump completed on 2024-10-16 10:34:01
