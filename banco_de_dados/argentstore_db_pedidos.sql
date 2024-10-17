@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: argentstore_db
 -- ------------------------------------------------------
--- Server version	8.0.38
+-- Server version	8.0.39
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -27,13 +27,13 @@ CREATE TABLE `pedidos` (
   `data_pagamento` date DEFAULT NULL,
   `status_pedido` varchar(50) DEFAULT NULL,
   `carrinho_id` int DEFAULT NULL,
-  `produtos_id` int DEFAULT NULL,
+  `registro_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `carrinho_id` (`carrinho_id`),
-  KEY `produtos_id` (`produtos_id`),
+  KEY `produtos_id` (`registro_id`),
   CONSTRAINT `pedidos_ibfk_1` FOREIGN KEY (`carrinho_id`) REFERENCES `carrinho` (`id`),
-  CONSTRAINT `pedidos_ibfk_2` FOREIGN KEY (`produtos_id`) REFERENCES `produtos` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `pedidos_ibfk_2` FOREIGN KEY (`registro_id`) REFERENCES `produtos` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +42,7 @@ CREATE TABLE `pedidos` (
 
 LOCK TABLES `pedidos` WRITE;
 /*!40000 ALTER TABLE `pedidos` DISABLE KEYS */;
-INSERT INTO `pedidos` VALUES (1,'2024-09-30','Pagamamento Confirmado',2,NULL);
+INSERT INTO `pedidos` VALUES (1,'2024-09-30','Pagamamento Confirmado',2,1),(2,'2024-10-02','Pagamamento Confirmado',2,2);
 /*!40000 ALTER TABLE `pedidos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -55,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-16 10:34:01
+-- Dump completed on 2024-10-16 22:26:51

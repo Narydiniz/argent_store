@@ -16,7 +16,7 @@ const getAllProdutos = (require, res) => {
 const addProdutos = (req, res) => {
     const {descricao,categoria, preco_produto} = req.body;
 
-    //Verificar se a transação já existe
+//Verificar se a transação já existe
 
     db.query(
         'SELECT * FROM produtos WHERE descricao=? AND categoria=? AND preco_produto=?',
@@ -29,12 +29,11 @@ const addProdutos = (req, res) => {
             }
 
             if (results.length > 0) {
-                //se a transação já existe
                 res.status(400).send('Produto duplicado')
             }
 
 
-            // Se a transação não existe, insira-a no banco de dados 
+// Se a transação não existe, insira-a no banco de dados 
             db.query(
                 'INSERT INTO produtos (descricao,categoria, preco_produto) VALUES  (?, ?, ?)',
                 [descricao,categoria, preco_produto],
@@ -72,7 +71,7 @@ const putProdutos = (req, res) => {
   };
    
    
-  // Função para atualizar uma transação existente (atualização parcial) 
+// Função para atualizar uma transação existente (atualização parcial) 
   const updateProdutos = (req, res) => { 
     const { id } = req.params; 
     const fields = req.body; 
@@ -110,7 +109,7 @@ const deleteProdutos= (req, res) => {
       } 
       res.send('Produto deletado com sucesso'); 
     }); 
-  }; 
+}; 
    
  
 module.exports = {

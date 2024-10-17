@@ -14,13 +14,13 @@ const  getAllPedidos = (require, res) => {
 
 //Função para adicionar uma nova transação (Com verificação de Duplicidade)
 const addPedidos = (req, res) => {
-    const {data_pagamento,status_pedido ,carrinho_id,produtos_id} = req.body;
+    const {data_pagamento,status_pedido ,carrinho_id,registro_id} = req.body;
 
 //Verificar se a transação já existe
 
     db.query(
-        'SELECT * FROM pedidos WHERE data_pagamento=? AND status_pedido=? AND carrinho_id=? AND produtos_id= ?',
-        [data_pagamento,status_pedido ,carrinho_id,produtos_id],
+        'SELECT * FROM pedidos WHERE data_pagamento=? AND status_pedido=? AND carrinho_id=? AND registro_id= ?',
+        [data_pagamento,status_pedido ,carrinho_id,registro_id],
         (err, results) => {
             if (err) {
                 console.error('Erro ao adicionar novo pedido', err);
@@ -36,8 +36,8 @@ const addPedidos = (req, res) => {
 
  // Se a transação não existe, insira-a no banco de dados 
             db.query(
-                'INSERT INTO pedidos (data_pagamento,status_pedido ,carrinho_id,produtos_id) VALUES  (?, ?, ?, ? )',
-                [data_pagamento,status_pedido ,carrinho_id,produtos_id],
+                'INSERT INTO pedidos (data_pagamento,status_pedido ,carrinho_id,registro_id) VALUES  (?, ?, ?, ? )',
+                [data_pagamento,status_pedido ,carrinho_id,registro_id],
                 (err, results) => {
                     if (err) {
                         console.error('Erro ao adicionar novo pedido', err);
@@ -56,10 +56,10 @@ const addPedidos = (req, res) => {
 // Função para atualizar uma transação existente (substituição completa) 
 const putPedidos = (req, res) => {
     const { id } = req.params;
-    const {data_pagamento,status_pedido ,carrinho_id,produtos_id} = req.body;
+    const {data_pagamento,status_pedido ,carrinho_id,registro_id} = req.body;
     db.query(
-      'UPDATE pedidos SET data_pagamento=?, status_pedido=? ,carrinho_id=?, produtos_id=? WHERE id=?',
-      [data_pagamento,status_pedido ,carrinho_id,produtos_id,id], 
+      'UPDATE pedidos SET data_pagamento=?, status_pedido=? ,carrinho_id=?, registro_id=? WHERE id=?',
+      [data_pagamento,status_pedido ,carrinho_id,registro_id,id], 
       (err, results) => {
         if (err) {
           console.error('Erro ao subestituir pedido ', err);

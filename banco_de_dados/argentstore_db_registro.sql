@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: argentstore_db
 -- ------------------------------------------------------
--- Server version	8.0.38
+-- Server version	8.0.39
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -45,7 +45,7 @@ CREATE TABLE `registro` (
 
 LOCK TABLES `registro` WRITE;
 /*!40000 ALTER TABLE `registro` DISABLE KEYS */;
-INSERT INTO `registro` VALUES (1,'Naryara','Diniz','senainaryara@gmail.com','86998456341','1998-03-01','64218-800','Rua N, n-255','$2b$10$VVN1PjJAn0GSDfrfzwguT.4qKv28VIQBXepvDi7TFZw8ZzU69Avii',NULL,NULL),(2,'Miguel','Sousa','miguelphb14@gmail.com','86998456381','2003-02-25','64218-800','Rua M, n-255','$2b$10$uN.BGaCZmxc.WWv4.EpEU.U3TLclnBniUMVJZTWVCDo0uArskopyC','a9e4a0ed09880a33bfcc71323b029fa8d6e792cd','2024-10-14 21:04:59');
+INSERT INTO `registro` VALUES (1,'Naryara','Diniz','senainaryara@gmail.com','86998456341','1998-03-01','64218-800','Rua N, n-255','$2b$10$d1x8eO9TnTwwkJGfA.hLj.sRh3uHrK6oPNU8nELZFPaOfDCFMbs6G',NULL,NULL),(2,'Miguel','Sousa','miguelphb14@gmail.com','86998456381','2003-02-25','64218-800','Rua M, n-255','$2b$10$uN.BGaCZmxc.WWv4.EpEU.U3TLclnBniUMVJZTWVCDo0uArskopyC','a9e4a0ed09880a33bfcc71323b029fa8d6e792cd','2024-10-14 21:04:59');
 /*!40000 ALTER TABLE `registro` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -58,4 +58,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-16 10:34:01
+-- Dump completed on 2024-10-16 22:26:51

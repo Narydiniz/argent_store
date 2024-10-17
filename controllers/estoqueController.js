@@ -16,7 +16,7 @@ const getAllEstoque = (require, res) => {
 const addEstoque = (req, res) => {
     const { quant_estoque,data_entrada,fornecedor,produtos_id  } = req.body;
 
-    //Verificar se a transação já existe
+//Verificar se a transação já existe
 
     db.query(
         'SELECT * FROM estoque WHERE quant_estoque=? AND data_entrada =? AND fornecedor =? AND produtos_id =? ',
@@ -29,11 +29,10 @@ const addEstoque = (req, res) => {
             }
 
             if (results.length > 0) {
-                //se a transação já existe
                 res.status(400).send('Produto duplicado')
             }
 
-            // Se a transação não existe, insira-a no banco de dados 
+// Se a transação não existe, insira-a no banco de dados 
             db.query(
                 'INSERT INTO estoque (quant_estoque,data_entrada,fornecedor,produtos_id ) VALUES  (?, ?, ?, ?)',
                 [quant_estoque,data_entrada,fornecedor,produtos_id ],
@@ -50,28 +49,25 @@ const addEstoque = (req, res) => {
         }
     );
 };
-
-
 // Função para atualizar uma transação existente (substituição completa) 
 const putEstoque = (req, res) => {
-    const { id } = req.params;
-    const { quant_estoque,data_entrada,fornecedor,produtos_id } = req.body;
-    db.query(
-      'UPDATE estoque SET quant_estoque = ?,  data_entrada =?, fornecedor = ?, produtos_id = ? WHERE id = ?',
-      [quant_estoque,data_entrada,fornecedor,produtos_id, id], 
-      (err, results) => {
-        if (err) {
-          console.error('Erro ao subestituir o produto do estoque', err); 
-          res.status(500).send('Erro ao substituir o produto do estoque');
-          return;
-        }
-        res.send('Dados do produto atualizado com sucesso');
+  const { id } = req.params;
+  const {quant_estoque,data_entrada,fornecedor,produtos_id} = req.body;
+  db.query(
+    'UPDATE produtos SET  quant_estoque=?, data_entrada=?, fornecedor=?, produtos_id=? WHERE id=?',
+    [quant_estoque,data_entrada,fornecedor,produtos_id, id], 
+    (err, results) => {
+      if (err) {
+        console.error('Erro ao substituir  produto do estoque ', err);
+        res.status(500).send('Erro ao substituir  produto do estoque');
+        return;
       }
-    );
-  };
-   
-   
-  // Função para atualizar uma transação existente (atualização parcial) 
+      res.send('Estoque atualizado com sucesso');
+    }
+  );
+};
+  
+// Função para atualizar uma transação existente (atualização parcial) 
   const updateEstoque = (req, res) => { 
     const { id } = req.params; 
     const fields = req.body; 
@@ -93,7 +89,7 @@ const putEstoque = (req, res) => {
           res.status(500).send('Erro ao atualizar dado do produto em estoque'); 
           return; 
         } 
-        res.send(' Dados do produto atualizados com sucesso'); 
+        res.send('Estoque atualizado com sucesso!'); 
       } 
     ); 
   };
